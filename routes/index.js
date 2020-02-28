@@ -1,11 +1,16 @@
 const express = require('express')
-//created the router for the whole website
 const router = express.Router()
 
 
-router.get('/', (req, res) => {
-    res.render('index')
+
+router.get('/', async (req, res) => {
+    var app = req.app;
+    const allMoviesArray = (app.get('allMovies'))
+
+    res.render('index', {allMoviesArray: allMoviesArray})
+
 })
+
 
 //exports the router so server can read it
 module.exports = router

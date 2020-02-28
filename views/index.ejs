@@ -1,1 +1,16 @@
-Middle
+<h2>Search Movies</h2>
+<form action="/movies" method="GET">
+    <div>
+        <label>Title</label>
+        <input type="text" name="title">
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+<%  allMoviesArray.forEach(movie => { %>
+<a href="/movies/<%= movie._id%>">
+    <div><%= movie.title  %> </div>
+    <div><%= movie.release_date  %> </div>
+    <div><%= movie.rating %> </div>
+</a>
+<% }) %>
