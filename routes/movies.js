@@ -1,10 +1,19 @@
 const express = require('express')
 //created the router for the whole website
 const router = express.Router()
+let newMovieArray = []
 
-// router.get('/sort', (req, res) =>{
-//     console.log(req.query.Test)
-// })
+router.get('/sort', async (req, res) =>{
+    res.render('movies/sort')
+
+    var app = req.app;
+    const allMoviesArray = (app.get('allMovies'))
+
+    if(req.query.userSubmit != null){
+        newMovieArray = await sortChoice(req.query.userSubmit, allMoviesArray)
+
+    }
+})
 
 router.get('/search', (req,res) =>{
     var app = req.app;
@@ -58,18 +67,6 @@ router.get('/', async (req, res) => {
 
     //this is rendering this page but it's still at /
     res.render('movies/index', {allMoviesArray: allMoviesArray})
-
-    if(req.query.userSubmit != null){
-        console.log(req.query.userSubmit)
-        let newMovieArray = await sortChoice(req.query.userSubmit, allMoviesArray)
-        console.log(newMovieArray)
-
-        await newMovieArray.forEach(movie => {
-            if(movie._id == req.params._id){
-                res.render('movies/show',{movie: movie})
-            }
-        })
-    }
 
 })
 

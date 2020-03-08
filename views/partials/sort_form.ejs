@@ -1,0 +1,23 @@
+<head>
+    <script type="text/javascript">
+        function changeFunc() {
+         const selectMovies = document.getElementById("selectMovies");
+         let inputValue = document.getElementById("input").value;
+         let selectedValue = selectMovies.options[selectMovies.selectedIndex].text;
+         inputValue = selectedValue;
+         window.location.href="/movies/sort";
+        }    
+       </script>
+    
+</head>
+
+<form action="/movies/sort" method="GET" onsubmit="changeFunc()">
+    <label for="movies">Sort:</label>
+        <select id="selectMovies" name="userSubmit">
+        <option value="none">none</option>
+        <option value="alphabetical">Alphabetical</option>
+        <option value="rating">Rating</option>
+        <option value="year">Year</option>
+        <input type="submit" id="input" name="submitType" onclick="changeFunc()">
+        </select>
+</form>
