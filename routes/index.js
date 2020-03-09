@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     var app = req.app;
     const allMoviesArray = (app.get('allMovies'))
 
-    res.render('index', {allMoviesArray: allMoviesArray})
+    res.render('index', { allMoviesArray: allMoviesArray })
 
 })
 

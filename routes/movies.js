@@ -4,16 +4,24 @@ const router = express.Router()
 let newMovieArray = []
 
 router.get('/sort', async (req, res) =>{
-    res.render('movies/sort')
-
     var app = req.app;
     const allMoviesArray = (app.get('allMovies'))
 
-    if(req.query.userSubmit != null){
-        newMovieArray = await sortChoice(req.query.userSubmit, allMoviesArray)
-
+    try{
+      newSortedArray = await pageRender(req.query.userSubmit, allMoviesArray)
+      console.log(newSortedArray)
+      res.render('movies/sort', {allMoviesArray: newSortedArray, userQuery: req.query.userSubmit})
+    }catch{
+      res.redirect('/')
     }
 })
+
+async function pageRender(userQuery, arrayOfMovies){
+  if(userQuery != null){
+    newMovieArray = sortChoice(userQuery, arrayOfMovies)
+  }
+  return newMovieArray
+}
 
 router.get('/search', (req,res) =>{
     var app = req.app;

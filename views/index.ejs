@@ -1,7 +1,1 @@
-<%  allMoviesArray.forEach(movie => { %>
-<a href="/movies/<%= movie._id%>">
-    <div><%= movie.title  %> </div>
-    <div><%= movie.release_date  %> </div>
-    <div><%= movie.rating %> </div>
-</a>
-<% }) %>
+<%- include('partials/allMovies.ejs') %>

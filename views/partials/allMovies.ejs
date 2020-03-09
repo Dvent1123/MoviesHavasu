@@ -1,7 +1,11 @@
-<%  allMoviesArray.forEach(movie => { %>
+<div>
+<% if (allMoviesArray != null) { %>
+    <%  allMoviesArray.forEach(movie => { %>
     <a href="/movies/<%= movie._id%>">
-        <div><%= movie.title  %> </div>
-        <div><%= movie.release_date  %> </div>
-        <div><%= movie.rating %> </div>
+        <div>Title: <%= movie.title  %> </div>
+        <div>Date of Release: <%= movie.release_date  %> </div>
+        <div>Rating: <%= movie.rating %> </div>
     </a>
-    <% }) %>
+<% }) %>
+<% } %> 
+</div>
