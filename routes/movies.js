@@ -8,7 +8,7 @@ router.get('/sort', async (req, res) =>{
     const allMoviesArray = (app.get('allMovies'))
 
     try{
-      newSortedArray = await pageRender(req.query.userSubmit, allMoviesArray)
+      newSortedArray = await pageRenderSort(req.query.userSubmit, allMoviesArray)
       console.log(newSortedArray)
       res.render('movies/sort', {allMoviesArray: newSortedArray, userQuery: req.query.userSubmit})
     }catch{
@@ -16,57 +16,25 @@ router.get('/sort', async (req, res) =>{
     }
 })
 
-async function pageRender(userQuery, arrayOfMovies){
+async function pageRenderSort(userQuery, arrayOfMovies){
   if(userQuery != null){
     newMovieArray = sortChoice(userQuery, arrayOfMovies)
   }
   return newMovieArray
 }
 
+
 router.get('/search', (req,res) =>{
     var app = req.app;
     const allMoviesArray = (app.get('allMovies'))
 
-    // let searchOptions = {}
-
-    // searchOptions.title = new RegExp(req.query.title, 'i')
-    // console.log(searchOptions.title)
-    // console.log(searchOptions)
-    // //const movie = allMoviesArray.find(searchOptions)
-
-    //console.log(movie)
-    
-    // let query = allMoviesArray.find(movie => movie.title == req.query.title)
-    // console.log(query.title)
-    //this ^ works just have to find a way to use regex to query the data and then pass into movie shit
-    
-    // let regexp
-    // let resultMovie 
-    // let test = allMoviesArray.find(movie => 
-    // {   regexp =  new RegExp(movie.title, 'i')
-    //     resultMovie = regexp.exec(req.query.title)
-    //     console.log(resultMovie)
-    // })
-    //code below also works but only when exact words are typed
-
-
-
-    //code below makes new regexpression and we want to find what is inside
-    //code below will take the query and execute on the string which is what the user input
-
-    // if(req.query.title != null && req.query.title != ''){
-    //     query = query.regex('title', new RegExp(req.query.title, 'i'))
-    // }
-
-    // try{
-    //     const movie = await query.exec()
-    //     res.render('movies/index',
-    //     {movie: movie, 
-    //     searchOptions: req.query})
-
-    // } catch{
-    //     res.redirect('/')
-    // }
+    //makes new regular expression using user input
+    var re = new RegExp(req.query.title, 'i')
+    var result = allMoviesArray.filter(movie =>{
+        return re.test(movie.title)
+    })
+    console.log(result)
+    res.render('movies/search',{allMoviesArray: result, userSubmit: req.query.title})
 })
 
 router.get('/', async (req, res) => {
