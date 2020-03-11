@@ -40,8 +40,6 @@ router.get('/search', (req,res) =>{
 router.get('/', async (req, res) => {
     var app = req.app;
     const allMoviesArray = (app.get('allMovies'))
-
-    //this is rendering this page but it's still at /
     res.render('movies/index', {allMoviesArray: allMoviesArray})
 
 })
